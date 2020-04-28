@@ -14,6 +14,8 @@ public class UserData {
     int    port;    // players's port
     String topic;   // name of the room player joined
     int    score;   // player's score
+    int round;
+    int errcnt;
 
     // Constructors
 
@@ -26,7 +28,7 @@ public class UserData {
         this.name = name;
         this.host = host;
         this.port = port;
-        token=host+":"+port;
+        this.token = host + ":" + port;
     }
 
     // Getters and setters for class fields
@@ -81,10 +83,23 @@ public class UserData {
         return token;
     }
 
-    @Override
-    public String toString() {
-        return "UserData{" + "id=" + id + ", token=" + token + ", name=" + name + ", host=" + host + ", port=" + port + ", topic=" + topic + ", score=" + score + '}';
+    public int getRound() {
+        return this.round;
     }
-    
-    
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    public int getErrcnt() {
+        return this.errcnt;
+    }
+
+    public void setErrcnt(int errcnt) {
+        this.errcnt = errcnt;
+    }
+
+    public String toString() {
+        return "UserData{id=" + this.id + ", token=" + this.token + ", name=" + this.name + ", host=" + this.host + ", port=" + this.port + ", topic=" + this.topic + ", score=" + this.score + '}';
+    }
 }

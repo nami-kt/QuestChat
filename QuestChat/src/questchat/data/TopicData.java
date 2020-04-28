@@ -14,6 +14,8 @@ public class TopicData {
     int    timeSec; // length of one game-round in seconds
     ArrayList<Integer> users = new ArrayList<>(); // list of players in the chat-room
     int    curRound = 0; // number of the current round
+    Solution solution;
+    long startRound;
 
     // Constructors
     
@@ -61,13 +63,25 @@ public class TopicData {
     public void setCurRound(int curRound) {
         this.curRound = curRound;
     }
-    
-    
 
-    @Override
-    public String toString() {
-        return "TopicData{" + "name=" + name + '}';
+    public Solution getSolution() {
+        return this.solution;
     }
-    
+
+    public void setSolution(Solution solution) {
+        this.solution = solution;
+    }
+
+    public long getStartRound() {
+        return this.startRound;
+    }
+
+    public void setStartRound(long startRound) {
+        this.startRound = startRound;
+    }
+
+    public String toString() {
+        return "TopicData{name=" + this.name + '}';
+    }
     
 }

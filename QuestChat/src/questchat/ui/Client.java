@@ -50,7 +50,7 @@ public class Client extends JPanel implements MessageListener{
     JPanel     panelChat = new JPanel(new BorderLayout(5, 5));
     QueryPane  queryPane = new QueryPane();
     
-    JLabel lGuess = new JLabel("Type your guess:");
+    JLabel lGuess = new JLabel("Tell your friends something:");
     JTextField tfGuess = new JTextField();
     JButton btnGuess = new JButton("Send");
 
@@ -243,6 +243,7 @@ public class Client extends JPanel implements MessageListener{
     public void onTaskInfo(TaskInfo msg) {
         System.out.println("onTaskInfo: "+msg);
         queryPane.setQuery(msg.getTask());
+        if(msg.getTimeout()>0) chatNotification("New equation");
     }
 
     // method is called when new message for chat is received

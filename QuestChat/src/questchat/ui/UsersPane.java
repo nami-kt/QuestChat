@@ -59,7 +59,11 @@ public class UsersPane extends JPanel {
             dlmUsers.addElement(str);
         }
     }
-    
+
+    public void setTitle(String str){
+        lRound.setText(str);
+    }
+
     // components check
     public static void main(String[] args) {
         

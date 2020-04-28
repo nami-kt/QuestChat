@@ -18,10 +18,75 @@ import javax.swing.JTextField;
  * 
  * Task for chat-room section
  */
+
+class EquationPane extends JComponent {
+
+    private String text;
+
+    public EquationPane() {
+        Dimension d = new Dimension(200, 100);
+        setMinimumSize(d);
+        setPreferredSize(d);
+    }
+
+    public void setText(String text) {
+        this.text = text;
+        invalidate();
+        repaint();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        int width = getWidth();
+        int height = getHeight();
+
+        Font font = getFont();
+        int size = font.getSize();
+
+        Font upFn = font.deriveFont((float)(font.getSize()-4));
+
+
+        int xpos = 10;
+        int s_w = 10;
+        int ypos = (height + size) / 2;
+
+        g2d.setColor(Color.white);
+        g2d.fillRect(0, 0, width, height);
+
+        g2d.setColor(Color.blue);
+
+        boolean upMode = false;
+        if (text != null) {
+            for (char c : text.toCharArray()) {
+                if (upMode && !Character.isDigit(c)) {
+                    upMode = false;
+                }
+                if (c == '^') {
+                    upMode = true;
+                    continue;
+                }
+                char[] data = {c};
+                g2d.setFont(font);
+                if (upMode) {
+                    g2d.setFont(upFn);
+                    g2d.drawChars(data, 0, 1, xpos, ypos - size / 2);
+                } else {
+                    g2d.drawChars(data, 0, 1, xpos, ypos);
+                }
+                xpos += s_w;
+            }
+        }
+    }
+
+}
+
+
 public class QueryPane extends JPanel {
 
     JLabel lTask = new JLabel("Equation");
-    JTextArea taTask = new JTextArea(3, 50);
     JLabel lAnswer = new JLabel("Enter the solutions separated by comma:");
     JTextField tfAnswer = new JTextField();
     JButton btnSend = new JButton("Send");
@@ -46,8 +111,7 @@ public class QueryPane extends JPanel {
         Box box = new Box(BoxLayout.Y_AXIS);
         add(box, BorderLayout.CENTER);
         box.add(taTask);    
-            taTask.setBorder(BorderFactory.createEtchedBorder());
-            taTask.setEditable(false);
+        taTask.setBorder(BorderFactory.createEtchedBorder());
         box.add(Box.createVerticalStrut(5));
         box.add(lAnswer);
         box.add(Box.createVerticalStrut(5));
@@ -58,8 +122,7 @@ public class QueryPane extends JPanel {
         line.add(Box.createHorizontalStrut(5));
         line.add(btnSend);
         box.add(Box.createVerticalStrut(5));
-        
-        //add(Box.createVerticalStrut(5), BorderLayout.WEST);
+
         add(Box.createVerticalStrut(10), BorderLayout.EAST);
         
         init();
@@ -67,7 +130,8 @@ public class QueryPane extends JPanel {
     
     // initialization
     private void init(){
-        
+        Font f = taTask.getFont().deriveFont(14f).deriveFont(Font.BOLD);
+        taTask.setFont(f);
     }
     
     // task text setup
@@ -94,6 +158,7 @@ public class QueryPane extends JPanel {
     public static void main(String[] args) {
         
         QueryPane pane = new QueryPane();
+        pane.setQuery(" 5x^2 + 3x + 7 = 0");
         
         JFrame frame = new JFrame(pane.getClass().getName());
 

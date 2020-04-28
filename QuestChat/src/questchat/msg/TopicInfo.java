@@ -40,10 +40,16 @@ public class TopicInfo {
         this.users = users;
     }
 
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
     @Override
     public String toString() {
         return "TopicInfo{" + "name=" + name + ", newcomer=" + newcomer + ", users=" + Arrays.toString(users) + '}';
     }
-    
-    
 }

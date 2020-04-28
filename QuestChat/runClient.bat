@@ -1,1 +1,0 @@
-java -cp QuestChat.jar questchat.net.ChatServer
